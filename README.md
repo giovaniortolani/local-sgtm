@@ -1,5 +1,7 @@
 # Local Server-Side Google Tag Manager
 
+Simulates a Google Tag Manager Server-Side environment locally using Docker. Perfect for debugging/developing your server-side implementation and Data Client/Tag templates without needing cloud infrastructure (GCP/AWS).
+
 ---
 
 ## Quick Start
@@ -261,3 +263,7 @@ docker-compose up -d --build
 ## License
 
 MIT License - feel free to use this in your projects!
+
+---
+
+Forked from [justushamalainen/datalayer-relay](https://github.com/justushamalainen/datalayer-relay).
