@@ -33,13 +33,21 @@ fi
 if [ ! -f "${CERT_FILE}" ] || [ ! -f "${KEY_FILE}" ]; then
     echo "🔧 Generating new self-signed SSL certificates..."
 
+    SAN="DNS:localhost,DNS:*.localhost,IP:127.0.0.1"
+    if [ ! -z "$CUSTOM_DOMAIN" ]; then
+        echo "🌐 Custom Domain detected: $CUSTOM_DOMAIN"
+        SAN="$SAN,DNS:$CUSTOM_DOMAIN"
+    fi
+
+    # Use the SAN variable in the command
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
         -keyout "${KEY_FILE}" \
         -out "${CERT_FILE}" \
         -subj "/C=US/ST=State/L=City/O=Development/CN=localhost" \
-        -addext "subjectAltName=DNS:localhost,DNS:*.localhost,IP:127.0.0.1" \
+        -addext "subjectAltName=$SAN" \
         2>/dev/null || {
-            # Fallback for older OpenSSL versions without -addext
+            # Fallback for older OpenSSL versions without -addext (might not support complex SANs easily)
+            echo "⚠️  Falling back to legacy OpenSSL command (Custom Domain might not work)"
             openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
                 -keyout "${KEY_FILE}" \
                 -out "${CERT_FILE}" \
