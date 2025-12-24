@@ -21,6 +21,10 @@ Set the following in `.env`:
 ```bash
 # Get this from GTM Admin > Container Settings
 CONTAINER_CONFIG=your_container_config_here
+
+# (Optional) Set a custom domain
+# CUSTOM_DOMAIN=sgtm.example.com
+
 ```
 
 ### 2. Start the Stack
@@ -34,7 +38,7 @@ docker-compose up -d
 This starts:
 - GTM Preview Server (for debugging)
 - GTM Live Server (for production simulation)
-- Nginx HTTPS Proxy (ports 8888, 8889)
+- Nginx HTTPS Proxy (ports 443, 8888, 8889)
 
 ### 3. Test It
 
@@ -44,12 +48,13 @@ docker-compose ps
 
 # Verify GTM containers
 curl -k https://localhost:8888/healthy  # Live server
+curl -k https://CUSTOM_DOMAIN/healthy # Live server - if CUSTOM_DOMAIN is configured
 curl -k https://localhost:8889/healthy  # Preview server
 ```
 
 ### 4. Add localhost to your server side container
 
-Add https://localhost:8888 to your server side container sites. Now you can preview and debug a server side container without server setup.
+Add https://localhost:8888 or https://CUSTOM_DOMAIN to your server side container sites. Now you can preview and debug a server side container without server setup.
 
 **That's it!** Click the test buttons and watch events flow through your server-side GTM container.
 
@@ -60,27 +65,28 @@ Add https://localhost:8888 to your server side container sites. Now you can prev
 The system consists of 4 Docker services:
 
 ```
-┌─────────────────────────────────────────────┐
-│  Browser                                    │
-│  ├─> https://localhost:8888 (GTM Live)      │
-│  └─> https://localhost:8889 (GTM Preview)   │
-└─────────────────────────────────────────────┘
+┌────────────────────────────────────────────────┐
+│  Browser                                       │
+│  ├─> https://localhost:8888 (GTM Live)         │
+│  ├─> https://CUSTOMDOMAIN (GTM Live - optional)│
+│  └─> https://localhost:8889 (GTM Preview)      │
+└────────────────────────────────────────────────┘
               ↓
-┌─────────────────────────────────────────────┐
-│  ssl-init (one-time)                        │
-│  └─> Generates SSL certificates             │
-└─────────────────────────────────────────────┘
+┌────────────────────────────────────────────────┐
+│  ssl-init (one-time)                           │
+│  └─> Generates SSL certificates                │
+└────────────────────────────────────────────────┘
               ↓
-┌─────────────────────────────────────────────┐
-│  nginx (HTTPS Proxy)                        │
-│  ├─> Port 8888 → gtm-live                   │
-│  └─> Port 8889 → gtm-preview                │
-└─────────────────────────────────────────────┘
+┌────────────────────────────────────────────────┐
+│  nginx (HTTPS Proxy)                           │
+│  ├─> Port 8888, 443 → gtm-live                 │
+│  └─> Port 8889 → gtm-preview                   │
+└────────────────────────────────────────────────┘
               ↓
-┌──────────────────┐    ┌─────────────────────┐
-│  gtm-live        │───→│  gtm-preview        │
-│  (Production)    │    │  (Debug Mode)       │
-└──────────────────┘    └─────────────────────┘
+┌────────────────────┐    ┌──────────────────────┐
+│  gtm-live          │───→│  gtm-preview         │
+│  (Production)      │    │  (Debug Mode)        │
+└────────────────────┘    └──────────────────────┘
 ```
 
 ### Service Details
@@ -90,7 +96,7 @@ The system consists of 4 Docker services:
 | ssl-init | ssl-init | - | Generates SSL certificates (runs once) |
 | gtm-preview | gtm-preview | Internal:8080 | GTM Preview Server |
 | gtm-live | gtm-live | Internal:8080 | GTM Live Server |
-| nginx | gtm-nginx | 8888, 8889 | HTTPS Proxy for GTM |
+| nginx | gtm-nginx | 443, 8888, 8889 | HTTPS Proxy for GTM |
 
 ---
 
@@ -109,12 +115,16 @@ The system consists of 4 Docker services:
 - **`CONTAINER_REFRESH_SECONDS`** - Container refresh interval
   - Default: `25`
 
+- **`CUSTOM_DOMAIN`** - Optional custom domain (e.g., `sgtm.example.com`)
+  - Default: `localhost`
+
 ### Example .env File
 
 ```bash
 # GTM Configuration
 CONTAINER_CONFIG=aWQ9AAANLVdSOUo0NTROJmVudj0xJmF1dGg9bnRMejlYRHhVU1RBd1VaOHdSb3N2dw==
 CONTAINER_REFRESH_SECONDS=25
+CUSTOM_DOMAIN=sgtm.example.com
 ```
 
 ---
