@@ -111,9 +111,54 @@ The system consists of 4 Docker services:
 
 ```bash
 # GTM Configuration
-CONTAINER_CONFIG=aWQ9R1RNLVdSOUo0NTROJmVudj0xJmF1dGg9bnRMejlYRHhVU1RBd1VaOHdSb3N2dw==
+CONTAINER_CONFIG=aWQ9AAANLVdSOUo0NTROJmVudj0xJmF1dGg9bnRMejlYRHhVU1RBd1VaOHdSb3N2dw==
 CONTAINER_REFRESH_SECONDS=25
 ```
+
+---
+
+## Custom Domains
+
+You can use a custom domain (e.g., `https://sgtm.example.com`) instead of `localhost`.
+
+### 1. Configure the Domain
+
+Edit your `.env` file and set the `CUSTOM_DOMAIN` variable:
+
+```bash
+CUSTOM_DOMAIN=sgtm.example.com
+```
+
+### 2. Update Hosts File
+
+Map the domain to your local machine in `/etc/hosts`:
+
+```bash
+sudo nano /etc/hosts
+```
+
+Add this line:
+```
+127.0.0.1 sgtm.example.com
+```
+
+### 3. Regenerate Certificates
+
+If you already have containers running, you need to regenerate the SSL certificates:
+
+```bash
+# Remove old certificates
+rm -rf ssl/
+
+# Restart and rebuild to generate new ones
+docker-compose down
+docker-compose up -d
+```
+
+### 4. Access the Servers
+
+- **Live Server**: `https://sgtm.example.com` (Port 443) OR `https://sgtm.example.com:8888`
+- **Preview Server**: `https://sgtm.example.com:8889`
 
 ---
 
@@ -168,14 +213,22 @@ docker-compose restart
 ### Port Already in Use
 
 ```bash
-# Find what's using port 3000
-lsof -i :3000
+# Find what's using the default ports
+lsof -i :8888
+lsof -i :8889
+lsof -i :443
 
-# Kill the process (replace PID)
-kill -9 <PID>
+# To change ports, you must edit docker-compose.yml directly:
+# 1. Open docker-compose.yml
+# 2. Locate the 'nginx' service
+# 3. Modify the ports section (HostPort:ContainerPort):
+#    ports:
+#      - 'YOUR_NEW_PORT:8888'
+#      - 'YOUR_PREVIEW_PORT:8889'
+#      - 'YOUR_HTTPS_PORT:8888'  (Optional 443 mapping)
 
-# Or change the port in .env
-echo "PORT=3001" >> .env
+# After changing ports, restart the stack:
+docker-compose down
 docker-compose up -d
 ```
 
