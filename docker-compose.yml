@@ -7,6 +7,8 @@ services:
     volumes:
       - ./ssl:/ssl
       - ./generate-ssl.sh:/generate-ssl.sh:ro
+    environment:
+      CUSTOM_DOMAIN: ${CUSTOM_DOMAIN}
     restart: 'no'
 
   # GTM Preview Server (must start first)
@@ -71,6 +73,7 @@ services:
     container_name: gtm-nginx
     ports:
       - '8888:8888' # Live server HTTPS
+      - '443:8888' # Live server Default HTTPS
       - '8889:8889' # Preview server HTTPS
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
