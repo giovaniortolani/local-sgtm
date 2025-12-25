@@ -120,6 +120,12 @@ The system consists of 4 Docker services:
 - **`CUSTOM_DOMAIN`** - Optional custom domain (e.g., `sgtm.example.com`)
   - Default: `localhost`
 
+- **`PORT_TAGGING_SERVER`** - HTTPS Port for the Live Server
+  - Default: `8888`
+
+- **`PORT_PREVIEW_SERVER`** - HTTPS Port for the Preview Server
+  - Default: `8889`
+
 ### Example .env File
 
 ```bash
@@ -228,18 +234,13 @@ docker-compose restart
 
 ```bash
 # Find what's using the default ports
-lsof -i :8888
-lsof -i :8889
+lsof -i :8888 # (or your PORT_TAGGING_SERVER value)
+lsof -i :8889 # (or your PORT_PREVIEW_SERVER value)
 lsof -i :443
 
-# To change ports, you must edit docker-compose.yml directly:
-# 1. Open docker-compose.yml
-# 2. Locate the 'nginx' service
-# 3. Modify the ports section (HostPort:ContainerPort):
-#    ports:
-#      - 'YOUR_NEW_PORT:8888'
-#      - 'YOUR_PREVIEW_PORT:8889'
-#      - 'YOUR_HTTPS_PORT:8888'  (Optional 443 mapping)
+# To change ports, update your .env file:
+PORT_TAGGING_SERVER=9000
+PORT_PREVIEW_SERVER=9001
 
 # After changing ports, restart the stack:
 docker-compose down
