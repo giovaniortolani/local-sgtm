@@ -25,11 +25,9 @@ services:
       test:
         [
           'CMD',
-          'wget',
-          '--quiet',
-          '--tries=1',
-          '--spider',
-          'http://localhost:8080/healthy',
+          '/nodejs/bin/node',
+          '-e',
+          "require('http').get('http://localhost:8080/healthy', (res) => { if (res.statusCode === 200) { process.exit(0) } else { process.exit(1) } }).on('error', (err) => process.exit(1))",
         ]
       interval: 30s
       timeout: 10s
@@ -56,11 +54,9 @@ services:
       test:
         [
           'CMD',
-          'wget',
-          '--quiet',
-          '--tries=1',
-          '--spider',
-          'http://localhost:8080/healthy',
+          '/nodejs/bin/node',
+          '-e',
+          "require('http').get('http://localhost:8080/healthy', (res) => { if (res.statusCode === 200) { process.exit(0) } else { process.exit(1) } }).on('error', (err) => process.exit(1))",
         ]
       interval: 30s
       timeout: 10s
