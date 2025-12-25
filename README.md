@@ -38,7 +38,7 @@ docker-compose up -d
 This starts:
 - GTM Preview Server (for debugging)
 - GTM Live Server (for production simulation)
-- Nginx HTTPS Proxy (ports 443, 8888, 8889)
+- nginx HTTPS Proxy (ports 443, 8888, 8889)
 
 ### 3. Test It
 
@@ -54,7 +54,7 @@ curl -k https://localhost:8889/healthy  # Preview server
 
 ### 4. Add localhost to your server side container
 
-Add https://localhost:8888 or https://CUSTOM_DOMAIN to your server side container sites. Now you can preview and debug a server side container without server setup.
+Add `https://localhost:8888` or `https://CUSTOM_DOMAIN` to your server side container sites. Now you can preview and debug a server side container without server setup.
 
 **That's it!** Click the test buttons and watch events flow through your server-side GTM container.
 
@@ -65,29 +65,31 @@ Add https://localhost:8888 or https://CUSTOM_DOMAIN to your server side containe
 The system consists of 4 Docker services:
 
 ```
-┌────────────────────────────────────────────────┐
-│  Browser                                       │
-│  ├─> https://localhost:8888 (GTM Live)         │
-│  ├─> https://CUSTOMDOMAIN (GTM Live - optional)│
-│  └─> https://localhost:8889 (GTM Preview)      │
-└────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────┐
+│  Browser                                          │
+│  ├─> https://localhost:8888 (GTM Live)            │
+│  ├─> https://_CUSTOMDOMAIN (GTM Live - optional)  │
+│  └─> https://localhost:8889 (GTM Preview)         │
+└───────────────────────────────────────────────────┘
               ↓
-┌────────────────────────────────────────────────┐
-│  ssl-init (one-time)                           │
-│  └─> Generates SSL certificates                │
-└────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────┐
+│  ssl-init (one-time)                              │
+│  └─> Generates SSL certificates                   │
+└───────────────────────────────────────────────────┘
               ↓
-┌────────────────────────────────────────────────┐
-│  nginx (HTTPS Proxy)                           │
-│  ├─> Port 8888, 443 → gtm-live                 │
-│  └─> Port 8889 → gtm-preview                   │
-└────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────┐
+│  nginx (HTTPS Proxy)                              │
+│  ├─> Port 8888, 443 (CUSTOM_DOMAIN) → gtm-live    │
+│  └─> Port 8889 → gtm-preview                      │
+└───────────────────────────────────────────────────┘
               ↓
-┌────────────────────┐    ┌──────────────────────┐
-│  gtm-live          │───→│  gtm-preview         │
-│  (Production)      │    │  (Debug Mode)        │
-└────────────────────┘    └──────────────────────┘
+┌────────────────────────────┐    ┌───────────────────────────────┐
+│  gtm-live (internal:8080)  │    │  gtm-preview (internal:8080)  │
+│  (Production)              │    │  (Debug Mode)                 │
+└────────────────────────────┘    └───────────────────────────────┘
 ```
+
+![Architecture](./architecture.png)
 
 ### Service Details
 
