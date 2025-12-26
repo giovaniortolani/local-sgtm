@@ -25,6 +25,10 @@ CONTAINER_CONFIG=your_container_config_here
 # (Optional) Set a custom domain
 # CUSTOM_DOMAIN=sgtm.example.com
 
+# (Optional) Set a custom port in the local machine
+# PORT_TAGGING_SERVER=8888
+# PORT_PREVIEW_SERVER=8889
+
 ```
 
 ### 2. Start the Stack
@@ -68,7 +72,7 @@ The system consists of 4 Docker services:
 ┌───────────────────────────────────────────────────┐
 │  Browser                                          │
 │  ├─> https://localhost:8888 (GTM Live)            │
-│  ├─> https://_CUSTOMDOMAIN (GTM Live - optional)  │
+│  ├─> https://CUSTOM_DOMAIN (GTM Live - optional)  │
 │  └─> https://localhost:8889 (GTM Preview)         │
 └───────────────────────────────────────────────────┘
               ↓
@@ -120,10 +124,10 @@ The system consists of 4 Docker services:
 - **`CUSTOM_DOMAIN`** - Optional custom domain (e.g., `sgtm.example.com`)
   - Default: `localhost`
 
-- **`PORT_TAGGING_SERVER`** - HTTPS Port for the Live Server
+- **`PORT_TAGGING_SERVER`** - HTTPS Port for the Live Server in local machine
   - Default: `8888`
 
-- **`PORT_PREVIEW_SERVER`** - HTTPS Port for the Preview Server
+- **`PORT_PREVIEW_SERVER`** - HTTPS Port for the Preview Server in local machine
   - Default: `8889`
 
 ### Example .env File
