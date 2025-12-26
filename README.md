@@ -289,6 +289,14 @@ docker-compose up -d --build
 
 ---
 
+## Performance Testing
+
+This project includes a suite of tools for benchmarking and stress-testing your sGTM container. You can find scripts for generating load (using `wrk` and `curl`) and monitoring resource usage in the `performance-testing` directory.
+
+[**View Performance Testing Documentation**](./performance-testing/README.md)
+
+---
+
 ## License
 
 MIT License - feel free to use this in your projects!
