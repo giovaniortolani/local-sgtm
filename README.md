@@ -30,8 +30,8 @@ PORT_TAGGING_SERVER=8888
 PORT_PREVIEW_SERVER=8889
 
 # (Optional) Set memory and cpu limits
-GTM_MEMORY_LIMIT=512m
-GTM_CPU_LIMIT=1
+MEMORY_LIMIT_SERVER=512m
+CPU_LIMIT_SERVER=1
 
 ```
 
@@ -134,9 +134,10 @@ The system consists of 4 Docker services:
 - **`PORT_PREVIEW_SERVER`** - HTTPS Port for the Preview Server in local machine
   - Default: `8889`
 
-- **`GTM_MEMORY_LIMIT`** - Memory limit for the containers (e.g., `512m`, `1g`)
+- **`MEMORY_LIMIT_SERVER`** - Memory limit for the containers (e.g., `512m`, `1g`)
   - Default: unlimited (as much as host system allows)
-- **`GTM_CPU_LIMIT`** - CPU limit for the containers (e.g., `0.5` for 50% of a core, `1.5` for 1.5 cores)
+
+- **`CPU_LIMIT_SERVER`** - CPU limit for the containers (e.g., `0.5` for 50% of a core, `1.5` for 1.5 cores)
   - Default: unlimited (as much as host system allows)
 
 ### Example .env File
@@ -146,6 +147,8 @@ The system consists of 4 Docker services:
 CONTAINER_CONFIG=aWQ9AAANLVdSOUo0NTROJmVudj0xJmF1dGg9bnRMejlYRHhVU1RBd1VaOHdSb3N2dw==
 CONTAINER_REFRESH_SECONDS=25
 CUSTOM_DOMAIN=sgtm.example.com
+MEMORY_LIMIT_SERVER=512m
+CPU_LIMIT_SERVER=1
 ```
 
 ---
