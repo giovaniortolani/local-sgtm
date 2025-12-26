@@ -2,6 +2,10 @@
 
 This directory contains scripts and tools for benchmarking and stress-testing the local sGTM (Server-Side Google Tag Manager) environment. These tools help in evaluating the performance and stability of the sGTM container under load.
 
+> ⚠️ Avoid using the Preview Version when testing, because it can have overhead when comparing to the Live Version.
+>
+> Try to always publish the version you want to test (e.g. set as the Live version) an run the tests against it.
+
 ## Tools Overview
 
 ### 1. [`run-performance-test.sh`](./run-performance-test.sh)
