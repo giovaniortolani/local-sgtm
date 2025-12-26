@@ -6,9 +6,17 @@ This directory contains scripts and tools for benchmarking and stress-testing th
 >
 > Try to always publish the version you want to test (e.g. set as the Live version) an run the tests against it.
 
+
 ## Tools Overview
 
 ### 1. [`run-performance-test.sh`](./run-performance-test.sh)
+
+**Prerequisites**
+
+- **Install `wrk`**: You need to install `wrk` benchmarking tool.
+  ```bash
+  brew install wrk
+  ```
 
 This is the main script for running performance tests using `wrk`. It wraps the `wrk` command and provides a user-friendly interface for configuring test parameters and selecting benchmark profiles.
 

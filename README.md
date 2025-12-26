@@ -4,6 +4,21 @@ Simulates a Google Tag Manager Server-Side environment locally using Docker. Per
 
 ---
 
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+- **sGTM Container**: You need access to a Google Tag Manager Server-Side container.
+- **Homebrew**: [Install Homebrew](https://brew.sh/#install) if you haven't already.
+- **Docker**: Install a container runtime. You have two main options:
+  - **Docker Desktop**: [Download and Install](https://docs.docker.com/desktop/setup/install/mac-install/#install-interactively)
+  - **Colima** (Lightweight alternative):
+    ```bash
+    brew install colima docker docker-compose
+    ```
+
+---
+
 ## Quick Start
 
 ### 1. Configure Environment Variables
