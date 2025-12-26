@@ -21,6 +21,11 @@ services:
     restart: unless-stopped
     networks:
       - gtm-network
+    deploy:
+      resources:
+        limits:
+          cpus: '${GTM_CPU_LIMIT:-0}'
+          memory: '${GTM_MEMORY_LIMIT:-0}'
     healthcheck:
       test:
         [
@@ -50,6 +55,11 @@ services:
       - 'host.docker.internal:host-gateway'
     networks:
       - gtm-network
+    deploy:
+      resources:
+        limits:
+          cpus: '${GTM_CPU_LIMIT:-0}'
+          memory: '${GTM_MEMORY_LIMIT:-0}'
     healthcheck:
       test:
         [

@@ -23,11 +23,15 @@ Set the following in `.env`:
 CONTAINER_CONFIG=your_container_config_here
 
 # (Optional) Set a custom domain
-# CUSTOM_DOMAIN=sgtm.example.com
+CUSTOM_DOMAIN=sgtm.example.com
 
 # (Optional) Set a custom port in the local machine
-# PORT_TAGGING_SERVER=8888
-# PORT_PREVIEW_SERVER=8889
+PORT_TAGGING_SERVER=8888
+PORT_PREVIEW_SERVER=8889
+
+# (Optional) Set memory and cpu limits
+GTM_MEMORY_LIMIT=512m
+GTM_CPU_LIMIT=1
 
 ```
 
@@ -118,7 +122,7 @@ The system consists of 4 Docker services:
 
 #### Optional
 
-- **`CONTAINER_REFRESH_SECONDS`** - Container refresh interval
+- **`CONTAINER_REFRESH_SECONDS`** - Interval between container refreshes to fetch the latest version of the container.
   - Default: `25`
 
 - **`CUSTOM_DOMAIN`** - Optional custom domain (e.g., `sgtm.example.com`)
@@ -129,6 +133,11 @@ The system consists of 4 Docker services:
 
 - **`PORT_PREVIEW_SERVER`** - HTTPS Port for the Preview Server in local machine
   - Default: `8889`
+
+- **`GTM_MEMORY_LIMIT`** - Memory limit for the containers (e.g., `512m`, `1g`)
+  - Default: unlimited (as much as host system allows)
+- **`GTM_CPU_LIMIT`** - CPU limit for the containers (e.g., `0.5` for 50% of a core, `1.5` for 1.5 cores)
+  - Default: unlimited (as much as host system allows)
 
 ### Example .env File
 
