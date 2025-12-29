@@ -1,6 +1,20 @@
 # Local Server-Side Google Tag Manager
 
-Simulates a Google Tag Manager Server-Side environment locally using Docker. Perfect for debugging/developing your server-side implementation and Data Client/Tag templates without needing cloud infrastructure (GCP/AWS).
+Simulates a Google Tag Manager Server-Side environment locally using Docker. Perfect for debugging/developing your server-side implementation and templates without needing cloud infrastructure (GCP/AWS).
+
+It also includes **Performance Testing** tools for benchmarking, and will soon support **Node.js Server Files Debugging**.
+
+### Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [Architecture](#architecture)
+- [Configuration](#configuration)
+- [Custom Domains](#custom-domains)
+- [Troubleshooting](#troubleshooting)
+- [Performance Testing](#performance-testing)
+- [Node.js Server Files Debugging](#nodejs-server-files-debugging)
+- [License](#license)
 
 ---
 
@@ -320,7 +334,7 @@ This project will include a suite of tools for debugging the Node.js files used 
 
 **Coming soon...**
 
-[**View NodeJS Server Files Debugging Documentation**](./nodejs-server-files-debugging/README.md)
+[**View Node.js Server Files Debugging Documentation**](./nodejs-server-files-debugging/README.md)
 
 ---
 
