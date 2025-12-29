@@ -9,10 +9,11 @@ Simulates a Google Tag Manager Server-Side environment locally using Docker. Per
 Before you begin, ensure you have the following:
 
 - **sGTM Container**: You need access to a Google Tag Manager Server-Side container.
-- **Homebrew**: [Install Homebrew](https://brew.sh/#install) if you haven't already.
 - **Docker**: Install a container runtime. You have two main options:
   - **Docker Desktop**: [Download and Install](https://docs.docker.com/desktop/setup/install/mac-install/#install-interactively)
   - **Colima** (Lightweight alternative):
+    - **Homebrew**: [Install Homebrew](https://brew.sh/#install) if you haven't already.
+    - **Install Colima**:
     ```bash
     brew install colima docker docker-compose
     ```
@@ -325,7 +326,7 @@ This project will include a suite of tools for debugging the Node.js files used 
 
 ## License
 
-[Apache License 2.0](./LICENSE)
+MIT License - feel free to use this in your projects!
 
 ---
 
