@@ -190,7 +190,8 @@ sudo nano /etc/hosts
 
 Add this line:
 ```
-127.0.0.1 sgtm.example.com
+127.0.0.1 {CUSTOM_DOMAIN}
+# e.g. 127.0.0.1 sgtm.example.com
 ```
 
 ### 3. Regenerate Certificates
