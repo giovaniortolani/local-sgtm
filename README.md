@@ -313,9 +313,19 @@ This project includes a suite of tools for benchmarking and stress-testing your 
 
 ---
 
+## NodeJS Server Files Debugging
+
+This project will include a suite of tools for debugging the Node.js files used by the sGTM container, namely: `server_bin.js`, `server_bootstrap.js` and `server.js`.
+
+**Coming soon...**
+
+[**View NodeJS Server Files Debugging Documentation**](./nodejs-server-files-debugging/README.md)
+
+---
+
 ## License
 
-MIT License - feel free to use this in your projects!
+[Apache License 2.0](./LICENSE)
 
 ---
 
