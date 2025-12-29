@@ -13,6 +13,7 @@ This directory contains scripts and tools for benchmarking and stress-testing th
 
 **Prerequisites**
 
+- **Homebrew**: [Install Homebrew](https://brew.sh/#install) if you haven't already.
 - **Install `wrk`**: You need to install `wrk` benchmarking tool.
   ```bash
   brew install wrk
@@ -22,14 +23,14 @@ This is the main script for running performance tests using `wrk`. It wraps the 
 
 **Usage:**
 ```bash
-./run-performance-test.sh [options] [profile] [x-gtm-server-preview]
+./run-performance-test.sh [options] [profile] [x-gtm-server-preview header value]
 ```
 
 **Arguments:**
 - `[profile]`: The benchmark profile to use (defined in `benchmark.lua`).
     - Defaults to `"ga4_pageview"`.
     - Other common options (check `benchmark.lua` for full list): `"ga4_purchase"`, `"datatag_pageview"`.
-- `[x-gtm-server-preview]`: Optional `X-GTM-Server-Preview` header value for debugging sessions.
+- `[x-gtm-server-preview header value]`: Optional `X-GTM-Server-Preview` header value for debugging sessions.
 
 **Options:**
 - `-t <threads>`: Number of threads to use (Default: 4).
@@ -55,9 +56,7 @@ This is the main script for running performance tests using `wrk`. It wraps the 
 ./run-performance-test.sh ga4_pageview ZW52LTN8cTlhaXNfYWtOQ3x==
 ```
 
----
-
-### 2. [`benchmark.lua`](./benchmark.lua)
+#### [`benchmark.lua`](./benchmark.lua)
 
 This Lua script is the configuration file for `wrk`. It defines the HTTP requests structure (method, path, headers, body) for different testing scenarios (profiles).
 
@@ -66,7 +65,7 @@ This Lua script is the configuration file for `wrk`. It defines the HTTP request
 
 ---
 
-### 3. [`flood-container-with-curl.sh`](./flood-container-with-curl.sh)
+### 2. [`flood-container-with-curl.sh`](./flood-container-with-curl.sh)
 
 A simple shell script to "flood" the container with a sequence of `curl` requests. Unlike `wrk` which is designed for high-concurrency benchmarking, this script is useful for generating a controlled, countable number of requests, often for functional verification under light load.
 
@@ -86,7 +85,7 @@ A simple shell script to "flood" the container with a sequence of `curl` request
 
 ---
 
-### 4. [`docker_stats_gtm_live_container_to_csv.sh`](./docker_stats_gtm_live_container_to_csv.sh)
+### 3. [`docker_stats_gtm_live_container_to_csv.sh`](./docker_stats_gtm_live_container_to_csv.sh)
 
 A monitoring utility that captures real-time resource usage statistics of the `gtm-live` Docker container and saves them to a CSV file.
 
