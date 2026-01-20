@@ -2,7 +2,7 @@
 
 Simulates a Google Tag Manager Server-Side environment locally using Docker. Perfect for debugging/developing your server-side implementation and templates without needing cloud infrastructure (GCP/AWS).
 
-It also includes **Performance Testing** tools for benchmarking, and will soon support **Node.js Server Files Debugging**.
+It also includes **Performance Testing** tools for benchmarking, and **Node.js Server Files Debugging**.
 
 ### Table of Contents
 
@@ -330,9 +330,7 @@ This project includes a suite of tools for benchmarking and stress-testing your 
 
 ## NodeJS Server Files Debugging
 
-This project will include a suite of tools for debugging the Node.js files used by the sGTM container, namely: `server_bin.js`, `server_bootstrap.js` and `server.js`.
-
-**Coming soon...**
+This project includes a suite of tools for debugging the Node.js files used by the sGTM container, namely: `server_bin.js`, `server_bootstrap.js` and `server.js`.
 
 [**View Node.js Server Files Debugging Documentation**](./nodejs-server-files-debugging/README.md)
 

@@ -14,7 +14,9 @@ This directory contains scripts and tools for benchmarking and stress-testing th
 **Prerequisites**
 
 - **Homebrew**: [Install Homebrew](https://brew.sh/#install) if you haven't already.
-- **Install `wrk`**: You need to install `wrk` benchmarking tool.
+- **Install `wrk`**: You need to install [`wrk` benchmarking tool](https://github.com/wg/wrk).
+
+  On MacOS you can install it using `brew`:
   ```bash
   brew install wrk
   ```

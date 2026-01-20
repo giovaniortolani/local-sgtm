@@ -15,9 +15,16 @@ services:
   gtm-preview:
     image: gcr.io/cloud-tagging-10302018/gtm-cloud-image:stable
     container_name: gtm-preview
+    ports:
+      # Node.js debugging
+      - '9228:9228'
     environment:
+      # sGTM env
       CONTAINER_CONFIG: ${CONTAINER_CONFIG}
       RUN_AS_PREVIEW_SERVER: 'true'
+      # Node.js debugging env
+      NODE_OPTIONS: ${DEBUGGING_ENABLED:+--inspect=0.0.0.0:9228}
+      GTM_PREVIEW_PARAMS_STRING_OR_HEADER: ${DEBUGGING_ENABLED:+${GTM_PREVIEW_PARAMS_STRING_OR_HEADER}}
     restart: unless-stopped
     networks:
       - gtm-network
@@ -43,11 +50,18 @@ services:
   gtm-live:
     image: gcr.io/cloud-tagging-10302018/gtm-cloud-image:stable
     container_name: gtm-live
+    ports:
+      # Node.js debugging
+      - '9229:9229'
     environment:
+      # sGTM env
       CONTAINER_CONFIG: ${CONTAINER_CONFIG}
       PREVIEW_SERVER_URL: 'https://host.docker.internal:8889'
       CONTAINER_REFRESH_SECONDS: ${CONTAINER_REFRESH_SECONDS}
       NODE_TLS_REJECT_UNAUTHORIZED: '0'
+      # Node.js debugging env
+      NODE_OPTIONS: ${DEBUGGING_ENABLED:+--inspect=0.0.0.0:9229}
+      GTM_PREVIEW_PARAMS_STRING_OR_HEADER: ${DEBUGGING_ENABLED:+${GTM_PREVIEW_PARAMS_STRING_OR_HEADER}}
     depends_on:
       - gtm-preview
     restart: unless-stopped
