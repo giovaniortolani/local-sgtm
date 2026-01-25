@@ -170,6 +170,15 @@ The system consists of 4 Docker services:
 - **`CPU_LIMIT_SERVER`** - CPU limit for the containers (e.g., `0.5` for 50% of a core, `1.5` for 1.5 cores)
   - Default: unlimited (as much as host system allows)
 
+#### Debugging Configuration
+
+- **`DEBUGGING_ENABLED`** - Set to `true` to enable Node.js inspector ports (9229/9228).
+  - Default: `false`
+
+- **`GTM_PREVIEW_PARAMS_STRING_OR_HEADER`** - Used for simulating a specific GTM Preview Mode environment.
+
+See [Debugging Documentation](./nodejs-server-files-debugging/README.md) for details.
+
 ### Example .env File
 
 ```bash
