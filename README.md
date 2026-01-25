@@ -347,7 +347,7 @@ This project includes a suite of tools for debugging the Node.js files used by t
 
 ## License
 
-MIT License - feel free to use this in your projects!
+[MIT License](./LICENSE.txt) - feel free to use this in your projects!
 
 ---
 
