@@ -170,6 +170,11 @@ The system consists of 4 Docker services:
 - **`CPU_LIMIT_SERVER`** - CPU limit for the containers (e.g., `0.5` for 50% of a core, `1.5` for 1.5 cores)
   - Default: unlimited (as much as host system allows)
 
+#### Debugging Configuration
+
+- **`DEBUGGING_ENABLED`** - Set to `true` to enable Node.js inspector ports (9228 for Preview Server and 9229 for Live Server).
+  - Default: `false`
+
 ### Example .env File
 
 ```bash

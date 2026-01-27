@@ -24,15 +24,14 @@ services:
       RUN_AS_PREVIEW_SERVER: 'true'
       # Node.js debugging env
       NODE_OPTIONS: ${DEBUGGING_ENABLED:+--inspect=0.0.0.0:9228}
-      GTM_PREVIEW_PARAMS_STRING_OR_HEADER: ${DEBUGGING_ENABLED:+${GTM_PREVIEW_PARAMS_STRING_OR_HEADER}}
     restart: unless-stopped
     networks:
       - gtm-network
     deploy:
       resources:
         limits:
-          cpus: '${GTM_CPU_LIMIT:-0}'
-          memory: '${GTM_MEMORY_LIMIT:-0}'
+          cpus: '${CPU_LIMIT_SERVER:-0}'
+          memory: '${MEMORY_LIMIT_SERVER:-0}'
     healthcheck:
       test:
         [
@@ -61,7 +60,6 @@ services:
       NODE_TLS_REJECT_UNAUTHORIZED: '0'
       # Node.js debugging env
       NODE_OPTIONS: ${DEBUGGING_ENABLED:+--inspect=0.0.0.0:9229}
-      GTM_PREVIEW_PARAMS_STRING_OR_HEADER: ${DEBUGGING_ENABLED:+${GTM_PREVIEW_PARAMS_STRING_OR_HEADER}}
     depends_on:
       - gtm-preview
     restart: unless-stopped
@@ -72,8 +70,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '${GTM_CPU_LIMIT:-0}'
-          memory: '${GTM_MEMORY_LIMIT:-0}'
+          cpus: '${CPU_LIMIT_SERVER:-0}'
+          memory: '${MEMORY_LIMIT_SERVER:-0}'
     healthcheck:
       test:
         [
